@@ -1,0 +1,84 @@
+figure {
+  margin: 1.4em 0;
+}
+
+.link-card {
+  position: relative;
+  display: block;
+  margin: 1em auto;
+  width: 390px;
+  box-sizing: border-box;
+  border-radius: 12px;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.link-card:hover {
+  cursor: default;
+  box-shadow: 0 0 0 2px rgb(0 102 255 / 30%);
+}
+
+.link-card.focused {
+  cursor: default;
+  box-shadow: 0 0 0 2px #06f;
+}
+
+.link-card-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-repeat: no-repeat;
+  filter: blur(20px);
+  background-size: cover;
+  background-position: 50%;
+}
+
+.link-card-content {
+  min-height: 84px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  border-radius: inherit;
+  background-color: hsla(0, 0%, 96.5%, 0.88);
+}
+
+.link-card-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 40px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.25;
+  color: #121212;
+}
+
+.link-card-meta {
+  display: flex;
+  margin-top: 4px;
+  font-size: 14px;
+  line-height: 20px;
+  color: #999;
+  white-space: nowrap;
+}
+
+.link-card-image-cell {
+  margin-left: 8px;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.link-card-image {
+  display: block;
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: inherit;
+  background-color: #ebebeb;
+}

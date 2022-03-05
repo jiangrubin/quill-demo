@@ -2,7 +2,7 @@
   <div id="editor">
     <div id="editor-toolbar">
       <emoji-tool @select="onSelectEmoji" />
-      <link-card-tool />
+      <link-card-tool @click.native="onClickLinkCard" />
     </div>
     <div id="editor-container" spellcheck="false"></div>
 
@@ -13,13 +13,22 @@
 <script>
 import Quill from 'quill'
 import 'quill/dist/quill.snow.css'
-import EmojiBlot from './formats/emoji'
-import LinkCardBlot from './formats/link-card'
+// import 'quill/dist/quill.bubble.css'
+import EmojiBlot from './blots/emoji'
+import LinkCardBlot from './blots/link-card'
+import MentionBlot from './blots/mention'
 import EmojiTool from './tools/emoji'
-import LinkCardTool from './tools/link-card.vue'
+import LinkCardTool from './tools/link-card'
+import MentionModule from './modules/mention'
+import './assets/style.scss'
+
+const Tooltip = Quill.import('ui/tooltip')
 
 Quill.register({
-  'formats/emoji': EmojiBlot
+  'formats/emoji': EmojiBlot,
+  'formats/link-card': LinkCardBlot,
+  'formats/mention': MentionBlot,
+  'modules/mention': MentionModule,
 }, true)
 
 export default {
@@ -44,7 +53,17 @@ export default {
         theme: 'snow',
         placeholder: '',
         modules: {
-          toolbar: '#editor-toolbar',
+          toolbar: {
+            container: '#editor-toolbar',
+          },
+          mention: {
+            source (searchTerm, renderList, mentionChar) {
+              renderList([
+                { id: 1, value: 'Fredrik' },
+                { id: 2, value: 'Patrik' }
+              ])
+            }
+          }
         }
       })
     },
@@ -56,6 +75,16 @@ export default {
         height: '20px',
         src: data.src_ios,
         alt: data.code_cn
+      })
+      this.quill.setSelection(index + 1)
+    },
+
+    onClickLinkCard () {
+      const { index = 0 } = this.quill.getSelection(true) || {}
+      this.quill.insertEmbed(index, 'link-card', {
+        url: 'https://quilljs.com/',
+        title: 'Quill - Your powerful rich text editor',
+        image: 'https://pic1.zhimg.com/v2-11df01f75e231325abeb7f68b4cd0473.jpg',
       })
       this.quill.setSelection(index + 1)
     },
