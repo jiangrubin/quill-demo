@@ -4,9 +4,12 @@
       <emoji-tool @select="onSelectEmoji" />
       <link-card-tool @click.native="onClickLinkCard" />
     </div>
+    
     <div id="editor-container" spellcheck="false"></div>
 
     <button @click="onSubmit">Submit</button>
+    <button @click="onUpdate">Update</button>
+    <button @click="onGetLeaf">Leaf</button>
   </div>
 </template>
 
@@ -53,6 +56,7 @@ export default {
         theme: 'snow',
         placeholder: '',
         modules: {
+          // toolbar: ['bold', { 'color': [] }, 'image'],
           toolbar: {
             container: '#editor-toolbar',
           },
@@ -65,6 +69,10 @@ export default {
             }
           }
         }
+      })
+
+      this.quill.on('text-change', function(delta) {
+        console.log(delta);
       })
     },
 
@@ -91,6 +99,27 @@ export default {
 
     onSubmit () {
       console.log(this.quill.getContents());
+    },
+
+    onUpdate () {
+      this.quill.setContents([
+        {
+          attributes: { alt: '[撇嘴]', height: '20px', width: '20px' },
+          insert: {
+            emoji: {
+              src: 'https://emojipedia-us.s3.amazonaws.com/content/2021/02/20/grimace_ios_802.png',
+              alt: '[撇嘴]',
+              width: '20px',
+              height: '20px',
+            }
+          }
+        },
+        { insert: '\n' }
+      ])
+    },
+
+    onGetLeaf () {
+      console.log(this.quill.getLeaf(0));
     }
   }
 }

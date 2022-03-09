@@ -154,10 +154,10 @@ export default class Mention extends Module {
 
   getItemData() {
     const { link } = this.mentionList.childNodes[this.itemIndex].dataset;
-    const hasLinkValue = typeof link !== "undefined";
+    const hasLinkValue = typeof link !== 'undefined';
     const itemTarget = this.mentionList.childNodes[this.itemIndex].dataset.target;
     if (hasLinkValue) {
-      this.mentionList.childNodes[this.itemIndex].dataset.value = `<a href="${link}" target=${itemTarget ||
+      this.mentionList.childNodes[this.itemIndex].dataset.value = `<a href='${link}' target=${itemTarget ||
         this.options.linkTarget}>${
         this.mentionList.childNodes[this.itemIndex].dataset.value
       }`

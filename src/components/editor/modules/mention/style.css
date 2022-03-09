@@ -46,11 +46,6 @@
 }
 
 .mention {
-  height: 24px;
-  width: 65px;
-  border-radius: 6px;
-  padding: 3px 0;
-  margin-right: 2px;
   user-select: all;
 }
 
